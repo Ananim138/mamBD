@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>З Днем Народження, Мамо!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #2e7d32;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        h1 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+
+        .flowers {
+            font-size: 3rem;
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flowers span {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .flowers span:nth-child(1) { animation-delay: 0s; }
+        .flowers span:nth-child(2) { animation-delay: 0.5s; }
+        .flowers span:nth-child(3) { animation-delay: 1s; }
+        .flowers span:nth-child(4) { animation-delay: 1.5s; }
+
+        .btn {
+            background: linear-gradient(45deg, #66bb6a, #2e7d32);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+            background: linear-gradient(45deg, #81c784, #388e3c);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .gift-box {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #a5d6a7, #66bb6a);
+            margin: 30px auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(101, 157, 74, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(101, 157, 74, 0.4);
+        }
+
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            top: 0;
+            left: 0;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .gift-box::after {
+            content: '🎁';
+            font-size: 3rem;
+        }
+
+        .hidden-message {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid #2e7d32;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: #1b5e20;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: heart-float 4s linear infinite;
+            opacity: 0;
+            color: #e53935;
+        }
+
+        @keyframes heart-float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .flowers {
+                font-size: 2rem;
+            }
+
+            .gift-box {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="confetti"></div>
+
+    <div class="container">
+        <h1>З Днем Народження, Мамо!</h1>
+
+        <p>Бажаю тобі міцного здоров'я, безмежного щастя та виконання всіх мрій!</p>
+        <p>Нехай кожен твій день буде наповнений радістю, гарним настроєм і любов'ю!</p>
+
+        <div class="flowers">
+            <span>💚</span>
+            <span>🎂</span>
+            <span>💐</span>
+            <span>🎈</span>
+        </div>
+
+        <button class="btn" id="hugBtn">ОБІЙНЯШКИ</button>
+
+        <div class="gift-box" id="giftBox"></div>
+
+        <div class="hidden-message" id="hiddenMessage">
+            <p>Мамочка, ти - найкраща у світі! 💖</p>
+            <p>Дякую за твою любов, турботу і терпіння.</p>
+            <p>Бажаю тобі безліч щасливих моментів і посмішок!</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>З любов'ю, твоя дитина ❤️</p>
+    </footer>
+
+    <script>
+        // Покращене конфетті
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#2e7d32', '#81c784', '#c8e6c9', '#a5d6a7', '#66bb6a', '#43a047', '#388e3c'];
+            const types = ['circle', 'square', 'heart'];
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = `${Math.random() * 10 + 5}px`;
+                confetti.style.height = confetti.style.width;
+
+                const type = types[Math.floor(Math.random() * types.length)];
+                if (type === 'circle') {
+                    confetti.style.borderRadius = '50%';
+                } else if (type === 'heart') {
+                    confetti.innerHTML = '❤️';
+                    confetti.style.fontSize = `${Math.random() * 10 + 10}px`;
+                    confetti.style.width = 'auto';
+                    confetti.style.height = 'auto';
+                }
+
+                confetti.style.backgroundColor = type !== 'heart' ? colors[Math.floor(Math.random() * colors.length)] : 'transparent';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear forwards`;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                confettiContainer.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // Функція для сердечок
+        function createHearts() {
+            const container = document.querySelector('body');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        // Обійми
+        document.getElementById('hugBtn').addEventListener('click', function() {
+            createConfetti();
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createHearts, i * 200);
+            }
+
+            // Створення модального вікна з обіймами
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.zIndex = '1000';
+            modal.style.animation = 'fadeIn 0.3s ease-out';
+
+            const content = document.createElement('div');
+            content.style.backgroundColor = 'white';
+            content.style.padding = '30px';
+            content.style.borderRadius = '15px';
+            content.style.textAlign = 'center';
+            content.style.maxWidth = '80%';
+
+            const hug = document.createElement('div');
+            hug.style.fontSize = '5rem';
+            hug.style.marginBottom = '20px';
+            hug.innerHTML = '🤗';
+            hug.style.animation = 'float 2s ease-in-out infinite';
+
+            const text = document.createElement('p');
+            text.style.fontSize = '1.5rem';
+            text.style.color = '#2e7d32';
+            text.textContent = 'ТЕПЛІ-ТЕПЛІ ОБІЙМИ ДЛЯ ТЕБЕ, МАМОЧКО! 💚';
+
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = 'Закрити';
+            closeBtn.style.marginTop = '20px';
+            closeBtn.style.padding = '8px 20px';
+            closeBtn.style.borderRadius = '20px';
+            closeBtn.style.border = 'none';
+            closeBtn.style.backgroundColor = '#2e7d32';
+            closeBtn.style.color = 'white';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.transition = 'all 0.3s ease';
+
+            closeBtn.addEventListener('mouseover', () => {
+                closeBtn.style.backgroundColor = '#81c784';
+            });
+
+            closeBtn.addEventListener('mouseout', () => {
+                closeBtn.style.backgroundColor = '#2e7d32';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.style.animation = 'fadeIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    modal.remove();
+                }, 300);
+            });
+
+            content.appendChild(hug);
+            content.appendChild(text);
+            content.appendChild(closeBtn);
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+        });
+
+        // Подарунок
+        document.getElementById('giftBox').addEventListener('click', function() {
+            const message = document.getElementById('hiddenMessage');
+            if (message.style.display === 'block') {
+                message.style.animation = 'fadeIn 0.5s ease-out reverse';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 500);
+            } else {
+                message.style.display = 'block';
+                createConfetti();
+                this.style.animation = 'pulse 0.5s';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 500);
+            }
+        });
+
+        // Запускаємо конфетті при завантаженні
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                createConfetti();
+
+                // Створення привітання
+                const welcome = document.createElement('div');
+                welcome.style.position = 'fixed';
+                welcome.style.top = '0';
+                welcome.style.left = '0';
+                welcome.style.width = '100%';
+                welcome.style.height = '100%';
+                welcome.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                welcome.style.display = 'flex';
+                welcome.style.flexDirection = 'column';
+                welcome.style.alignItems = 'center';
+                welcome.style.justifyContent = 'center';
+                welcome.style.zIndex = '1000';
+                welcome.style.animation = 'fadeIn 0.5s ease-out';
+
+                const cake = document.createElement('div');
+                cake.style.fontSize = '5rem';
+                cake.style.marginBottom = '20px';
+                cake.style.animation = 'float 3s ease-in-out infinite';
+                cake.textContent = '🎂';
+
+                const text = document.createElement('h1');
+                text.style.color = 'white';
+                text.style.textAlign = 'center';
+                text.style.maxWidth = '90%';
+                text.style.fontSize = '2rem';
+                text.textContent = 'Дорога мамо, вітаю з Днем Народження! 🎉';
+
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = 'Дякую! ❤️';
+                closeBtn.style.marginTop = '30px';
+                closeBtn.style.padding = '10px 30px';
+                closeBtn.style.borderRadius = '30px';
+                closeBtn.style.border = 'none';
+                closeBtn.style.backgroundColor = '#2e7d32';
+                closeBtn.style.color = 'white';
+                closeBtn.style.fontSize = '1.2rem';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.style.transition = 'all 0.3s ease';
+
+                closeBtn.addEventListener('mouseover', () => {
+                    closeBtn.style.backgroundColor = '#81c784';
+                    closeBtn.style.transform = 'scale(1.05)';
+                });
+
+                closeBtn.addEventListener('mouseout', () => {
+                    closeBtn.style.backgroundColor = '#2e7d32';
+                    closeBtn.style.transform = 'scale(1)';
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    welcome.style.animation = 'fadeIn 0.5s ease-out reverse';
+                    setTimeout(() => {
+                        welcome.remove();
+                    }, 500);
+                });
+
+                welcome.appendChild(cake);
+                welcome.appendChild(text);
+                welcome.appendChild(closeBtn);
+                document.body.appendChild(welcome);
+            }, 500);
+        });
+
+        // Періодичне створення сердечок
+        setInterval(createHearts, 3000);
+
+        // Додавання ефекту при наведенні на квіти
+        document.querySelectorAll('.flowers span').forEach(flower => {
+            flower.addEventListener('mouseover', () => {
+                flower.style.transform = 'scale(1.2)';
+                flower.style.transition = 'transform 0.3s ease';
+            });
+
+            flower.addEventListener('mouseout', () => {
+                flower.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
